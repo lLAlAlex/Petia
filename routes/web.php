@@ -25,10 +25,6 @@ Route::get('/login', [AuthController::class, 'loginIndex'])->middleware('auth.lo
 Route::get('/register', [AuthController::class, 'registerIndex'])->middleware('auth.login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
-
-Route::get('/login/id', [AuthController::class, 'loginIndoIndex'])->middleware('auth.login');
-Route::get('/register/id', [AuthController::class, 'registerIndoIndex'])->middleware('auth.login');
-
 Route::get('/profile', [AuthController::class, 'userData'])->middleware('auth.guest');
 
 Route::get('/logout', [AuthController::class, 'logout']);

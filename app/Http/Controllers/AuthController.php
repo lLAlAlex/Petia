@@ -39,32 +39,6 @@ class AuthController extends Controller
         return view('register', compact('title', 'first', 'last', 'role', 'customer', 'shelter', 'phone', 'confirm', 'username', 'desc', 'link'));
     }
 
-    public function loginIndoIndex()
-    {
-        App::setLocale('id');
-        $title = trans('login.title');
-        $desc = trans('login.description');
-        $link = trans('login.link');
-        return view('loginindo', compact('title', 'desc', 'link'));
-    }
-
-    public function registerIndoIndex()
-    {
-        App::setLocale('id');
-        $title = trans('register.title');
-        $first = trans('register.firstname');
-        $last = trans('register.lastname');
-        $role = trans('register.role');
-        $customer = trans('register.customer');
-        $shelter = trans('register.shelter');
-        $phone = trans('register.phone');
-        $confirm = trans('register.confirm');
-        $username = trans('register.username');
-        $desc = trans('register.description');
-        $link = trans('register.link');
-        return view('regisindo', compact('title', 'first', 'last', 'role', 'customer', 'shelter', 'phone', 'confirm', 'username', 'desc', 'link'));
-    }
-
     public function register(Request $request)
     {
         $rules = [
