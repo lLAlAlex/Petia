@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pet;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 
@@ -30,7 +31,9 @@ class WishlistController extends Controller
 
     public function wishlistIndex()
     {
-        $wishlists = Wishlist::where('userID', auth()->user()->id)->paginate(5);
+        $wishlistPetIds = Wishlist::where('userID', auth()->user()->id)->pluck('petID');
+        $pets = Pet::where('isAdopted', 0)->pluck('id');
+        $wishlists = Wishlist::where('userID', auth()->user()->id)->whereIn('petID', $pets)->simplePaginate(5);
 
         return view('/wishlist', compact('wishlists'));
     }

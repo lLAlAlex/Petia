@@ -50,3 +50,7 @@ Route::put('/acceptrequest/{id}', [AdoptionController::class, 'acceptRequest']);
 Route::put('/rejectrequest/{id}', [AdoptionController::class, 'rejectRequest']);
 
 Route::get('/newadoption', [AdoptionController::class, 'createIndex']);
+Route::get('/history', [AdoptionController::class, 'historyIndex']);
+Route::get('/historydetail/{id}', [AdoptionController::class, 'historyDetailIndex']);
+
+Route::get('/profile', [AuthController::class, 'profileIndex']);

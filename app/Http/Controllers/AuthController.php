@@ -110,4 +110,11 @@ class AuthController extends Controller
         Auth::logout();
         return redirect('/login');
     }
+
+    public function profileIndex()
+    {
+        $user = User::find(auth()->user()->id);
+
+        return view('/profile', compact('user'));
+    }
 }

@@ -11,9 +11,9 @@ class PetController extends Controller
 {
     public function getPetDatas()
     {
-        $acceptedAdoptionPetIds = Adoption::where('status', 'Accepted')->pluck('petID');
-        $pets = Pet::whereNotIn('id', $acceptedAdoptionPetIds)->simplePaginate(5);
+        $pets = Pet::where('isAdopted', 0)->simplePaginate(5);
         $wishlists = Wishlist::where('userID', auth()->user()->id)->get();
+        $adoptions = Adoption::where('status', 'Accepted');
 
         return view('pets', compact('pets', 'wishlists'));
     }
