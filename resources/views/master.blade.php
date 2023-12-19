@@ -10,6 +10,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{ asset('script.js') }}"></script>
+    <style>
+        #popup {
+            transform: translate(0px, -250px);
+            transition-duration: 1s;
+        }
+    </style>
 </head>
 
 <nav class="bg-gray-800">
@@ -34,8 +40,7 @@
             </div>
             <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div class="flex flex-shrink-0 items-center">
-                    <img class="h-8 w-auto" src="{{ Storage::url("logo.png") }}"
-                        alt="Your Company">
+                    <img class="h-8 w-auto" src="{{ Storage::url('logo.png') }}" alt="Your Company">
                 </div>
                 <div class="hidden sm:ml-6 sm:block">
                     <div class="flex space-x-4">
@@ -51,7 +56,8 @@
                                 class="@if (request()->is('requests')) bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium @else text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium @endif">Adoption
                                 Requests</a>
                             <a href="/newadoption"
-                                class="@if (request()->is('newadoption')) bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium @else text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium @endif">Create Adoption</a>
+                                class="@if (request()->is('newadoption')) bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium @else text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium @endif">Create
+                                Adoption</a>
                         @endif
                     </div>
                 </div>
@@ -115,6 +121,17 @@
 
 <body class="bg-[#CDD1E4]">
     @yield('content')
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var errorModal = document.getElementById('popup');
+            errorModal.style.transform = 'translateY(0%)';
+
+            setTimeout(function() {
+                errorModal.style.transform = 'translateY(-250%)';
+            }, 3000);
+        });
+    </script>
 </body>
 
 </html>

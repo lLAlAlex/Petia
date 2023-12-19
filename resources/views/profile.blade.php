@@ -4,12 +4,14 @@
 
 @section('content')
     <div class="container flex p-8 flex-col">
-        <form method="POST" action="">
+        <form method="POST" action="{{ route('changeprofile') }}" enctype="multipart/form-data">
             @csrf
             <div class="flex items-center">
                 <img class="h-48 w-48 rounded-full object-cover" src="{{ Storage::url(auth()->user()->profileImage) }}"
                     alt="profile">
-                <input type="file" class="ml-6">
+                <input type="file" class="ml-6" name="image">
+                <button type="submit"
+                    class="flex justify-center rounded-md bg-blue-600 px-3 mr-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">Confirm</button>
             </div>
         </form>
         <div class="mt-6 w-full bg-white p-6 rounded-3xl">

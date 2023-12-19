@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Termwind\Components\Dd;
 
@@ -68,6 +69,8 @@ class AuthController extends Controller
 
         $user->save();
 
+        Session::flash('message', 'Account Registered Successfully!');
+
         return redirect('/login');
     }
 
@@ -91,6 +94,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
+            Session::flash('message', 'Wrong Credentials!');
             return back()->withErrors($validator);
         }
     }
@@ -116,5 +120,20 @@ class AuthController extends Controller
         $user = User::find(auth()->user()->id);
 
         return view('/profile', compact('user'));
+    }
+
+    public function changeProfile(Request $request)
+    {
+        $user = User::find(auth()->user()->id);
+        $file = $request->file('image');
+
+        if ($file != NULL) {
+            $imageName = time() . '.' . $file->getClientOriginalExtension();
+            Storage::putFileAs('public/', $file, $imageName);
+            $user->profileImage = $imageName;
+        }
+        $user->save();
+
+        return redirect()->back();
     }
 }

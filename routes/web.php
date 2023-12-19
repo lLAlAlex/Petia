@@ -54,3 +54,5 @@ Route::get('/history', [AdoptionController::class, 'historyIndex']);
 Route::get('/historydetail/{id}', [AdoptionController::class, 'historyDetailIndex']);
 
 Route::get('/profile', [AuthController::class, 'profileIndex']);
+Route::post('/newadoption', [PetController::class, 'createPet'])->name('createadoption');
+Route::post('/profile', [AuthController::class, 'changeProfile'])->name('changeprofile');

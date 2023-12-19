@@ -7,10 +7,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Register Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        #popup {
+            transform: translate(0px, -100px);
+            transition-duration: 1s;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
+    @if ($errors->any())
+        <div id="popup" class="flex fixed w-full">
+            <div class="mx-auto shadow-xl p-6 rounded-xl bg-sky-50 font-bold">{{ $errors->first() }}</div>
+        </div>
+    @endif
+    <div class="bg-white px-6 py-24 sm:py-32 lg:px-8">
         <div class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
             aria-hidden="true">
             <div class="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
@@ -66,7 +77,7 @@
                                 <option>{{ $shelter }}</option>
                             </select>
                         </div>
-                        <input type="tel" name="phone-number" id="phone-number" autocomplete="tel"
+                        <input type="text"
                             class="block w-full rounded-md border-0 px-3.5 py-2 pl-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
@@ -113,6 +124,17 @@
             </div>
         </form>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var errorModal = document.getElementById('popup');
+            errorModal.style.transform = 'translateY(25%)';
+
+            setTimeout(function() {
+                errorModal.style.transform = 'translateY(-150%)';
+            }, 3000);
+        });
+    </script>
 </body>
 
 </html>

@@ -7,9 +7,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        #popup {
+            transform: translate(0px, -100px);
+            transition-duration: 1s;
+        }
+    </style>
 </head>
 
 <body>
+    @if (Session::has('message'))
+        <div id="popup" class="flex fixed w-full z-100">
+            <div class="mx-auto shadow-xl p-6 rounded-xl bg-sky-50 font-bold">{{ Session::get('message') }}</div>
+        </div>
+    @endif
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <img class="mx-auto h-16 w-auto" src="{{ Storage::url('logo.png') }}" alt="Petia">
@@ -52,6 +63,17 @@
             </p>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var errorModal = document.getElementById('popup');
+            errorModal.style.transform = 'translateY(25%)';
+
+            setTimeout(function() {
+                errorModal.style.transform = 'translateY(-150%)';
+            }, 3000);
+        });
+    </script>
 </body>
 
 </html>

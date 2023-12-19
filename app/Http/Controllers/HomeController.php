@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function getHomeDatas()
     {
-        $pets = Pet::where('isAdopted', 0)->take(5)->get();
+        $pets = Pet::where('isAdopted', 0)->take(3)->get();
         $wishlists = Wishlist::where('userID', auth()->user()->id)->get();
 
         return view('home', compact('pets', 'wishlists'));
